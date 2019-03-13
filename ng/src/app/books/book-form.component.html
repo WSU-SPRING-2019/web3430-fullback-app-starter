@@ -1,0 +1,55 @@
+<h2>{{ book.id !== undefined ? "Edit an existing book" : "Create a new book" }}</h2>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngClass]="{'was-validated': !f.valid && !f.pristine}">
+  <div class="form-group row">
+    <label for="btitle" class="col-sm-2 col-form-label">Title</label>
+    <div class="col-sm-10">
+      <input type="text" required minlength="5" maxlength="60" class="form-control" name="title" id="btitle" [(ngModel)]="book.title" #title="ngModel">
+      <div class="invalid-feedback" [hidden]="title.valid || title.pristine">
+        Please enter a title.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="buthor" class="col-sm-2 col-form-label">Author</label>
+    <div class="col-sm-10">
+      <input type="text" required class="form-control" name="author" id="bauthor" [(ngModel)]="book.author" #author="ngModel">
+      <div class="invalid-feedback" [hidden]="author.valid || author.pristine">
+        Please ener an author.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="bposter" class="col-sm-2 col-form-label">Poster</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" name="poster" id="bposter" [(ngModel)]="book.poster" >
+      <div class="invalid-feedback" >
+        Please enter a valid URL for the poster.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="bisbn" class="col-sm-2 col-form-label">ISBN</label>
+    <div class="col-sm-10">
+      <input type="text" required class="form-control" name="isbn" id="bisbn"  [(ngModel)]="book.isbn" #isbn="ngModel">
+      <div class="invalid-feedback" [hidden]="isbn.valid || isbn.pristine">
+        Please enter an isbn
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="bsynopsis" class="col-sm-2 col-form-label">Synopsis</label>
+    <div class="col-sm-10">
+      <textarea name="synopsis" required id="bsynopsis" cols="30" rows="10" class="form-control" [(ngModel)]="book.synopsis" #synopsis="ngModel"></textarea>
+      <div class="invalid-feedback" [hidden]="synopsis.valid || synopsis.pristine">
+        Please enter a synopsis.
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+      <label for="" class="col-sm-2 col-form-label"></label>
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary">Submit</button>&nbsp;
+        <button class="btn btn-secondary" routerLink="/books">Cancel</button>
+      </div>
+    </div>
+</form>

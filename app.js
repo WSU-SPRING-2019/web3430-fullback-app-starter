@@ -13,7 +13,7 @@ let sassMiddleware = require('node-sass-middleware');
 
 // Connect to mongodb using mongoose
 import { connect } from "./config/db"
-connect('mongodb://localhost:27017/demo')
+connect('mongodb://localhost:27017/mine')
 
 let app = express();
 

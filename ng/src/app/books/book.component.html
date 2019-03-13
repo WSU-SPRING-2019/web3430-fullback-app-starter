@@ -1,0 +1,38 @@
+<div class="card">
+    <img src="{{book.poster}}" class="card-img-top">
+    <div class="card-body" *ngIf="!expanded">
+        <h5 class="card-title"> {{ book.title }}</h5>
+        <p class="card-text">{{ book.synopsis.substring(0, 150) }}</p>
+        <button class="btn btn-primary" (click)="expandOrShrink()">More</button>
+    </div>
+    <div class="card-body" *ngIf="expanded">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text"><strong>author</strong>: {{ book.author }}</p>
+        <p class="card-text"><strong>isbn</strong>: {{ book.isbn }}</p>
+        <p class="card-text"><strong>synopsis</strong>: {{ book.synopsis }}</p>
+        <button class="btn btn-secondary" (click)="expandOrShrink()">Less</button>&nbsp;
+        <button class="btn btn-success" routerLink="/books/{{book.id}}/edit">Edit</button>&nbsp;
+        <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#card-modal-' + book.id">Delete</button>
+    </div>
+</div>
+
+
+<div class="modal fade" id="card-modal-{{ book.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Confirm deletion</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are your sure you want to delete book <strong>{{ book.title }}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="onDelete(book)">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
