@@ -1,3 +1,4 @@
+/*
 import { Book } from './book';
 
 
@@ -46,4 +47,4 @@ export const BEST_SELLERS : Book[] =  [
       synopsis: `Pete Banning was Clanton, Mississippi’s favorite son—a decorated World War II hero, the patriarch of a prominent family, a farmer, father, neighbor, and a faithful member of the Methodist church. Then one cool October morning he rose early, drove into town, and committed a shocking crime.  Pete's only statement about it—to the sheriff, to his lawyers, to the judge, to the jury, and to his family—was: "I have nothing to say." He was not afraid of death and was willing to take his motive to the grave.`
     }
   ]
-  
+  */

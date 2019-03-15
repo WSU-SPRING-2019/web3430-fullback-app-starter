@@ -20,10 +20,10 @@ export class BookFormComponent implements OnInit {
 
   onSubmit(f: NgForm){
     if(f.valid){
-      if(this.book.id === undefined){
-        this.booksService.createBook(this.book)
+      if(this.book._id === undefined){
+        this.booksService.createBook(this.book).subscribe(res => this.book = res)
       }else{
-        this.booksService.updateBook(this.book);
+        this.booksService.updateBook(this.book).subscribe(res => this.book = res);
       }
 
       this.router.navigate(['/books'])

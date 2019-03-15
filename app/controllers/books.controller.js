@@ -14,13 +14,21 @@ router.get('/api/books', function(req, res, next){
   
 })
 
+router.post('/api/books/create', function(req, res, next){
+  new Book(req.body).save(err => {
+    if(err){
+      res.json({success: false, message: "Unable to save book"})
+    }else{
+      res.end()
+    }
+  })
+})
+
 router.get('/api/books/:id', function(req, res, next){
   res.json({success: false, message: "Not implemented yet"})
 })
 
-router.post('/api/books/create', function(req, res, next){
-  res.json({success: false, message: "Not implemented yet"})
-})
+
 
 router.put('/api/books/:id/update', function(req, res, next){
   res.json({success: false, message: "Not implemented yet"})
