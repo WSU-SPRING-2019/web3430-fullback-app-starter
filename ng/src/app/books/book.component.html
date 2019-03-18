@@ -11,13 +11,13 @@
         <p class="card-text"><strong>isbn</strong>: {{ book.isbn }}</p>
         <p class="card-text"><strong>synopsis</strong>: {{ book.synopsis }}</p>
         <button class="btn btn-secondary" (click)="expandOrShrink()">Less</button>&nbsp;
-        <button class="btn btn-success" routerLink="/books/{{book.id}}/edit">Edit</button>&nbsp;
-        <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#card-modal-' + book.id">Delete</button>
+        <button class="btn btn-success" routerLink="/books/{{book._id}}/edit">Edit</button>&nbsp;
+        <button type="button" class="btn btn-danger" data-toggle="modal" [attr.data-target]="'#card-modal-' + book._id">Delete</button>
     </div>
 </div>
 
 
-<div class="modal fade" id="card-modal-{{ book.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="card-modal-{{ book._id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">

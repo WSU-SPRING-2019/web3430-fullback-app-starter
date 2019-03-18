@@ -14,7 +14,7 @@ export class BookFormComponent implements OnInit {
   ngOnInit() {
     let bid = this.route.snapshot.params['id']
     if(bid !== undefined){
-      this.booksService.getBook(+bid).subscribe( orig => Object.assign(this.book, orig))
+      this.booksService.getBook(bid).subscribe( orig => Object.assign(this.book, orig))
     }
   }
 

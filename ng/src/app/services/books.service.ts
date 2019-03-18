@@ -12,9 +12,8 @@ const httpHeaders = {
 })
 export class BooksService {
   constructor(private http : HttpClient){}
-  getBook(id: number): Observable<Book> {
-    //TODO
-    return of(null)
+  getBook(id: string): Observable<Book> {
+    return this.http.get<Book>(`http://localhost:8080/api/books/${id}`, httpHeaders)
   }
 
   getBooks(): Observable<Book[]> {
@@ -26,7 +25,7 @@ export class BooksService {
   }
 
   updateBook(book: Book): any {
-    //TODO
+    return this.http.put<Book>(`http://localhost:8080/api/books/${book._id}/update`, book, httpHeaders)
     return of(null)
   }
 

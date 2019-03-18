@@ -25,7 +25,14 @@ router.post('/api/books/create', function(req, res, next){
 })
 
 router.get('/api/books/:id', function(req, res, next){
-  res.json({success: false, message: "Not implemented yet"})
+  Book.findById(req.params.id, (err, book) => {
+    if(err){
+      res.json({success: false, message: "Requested book not found"})
+    }else{
+      res.write(JSON.stringify(book))
+      res.end()
+    }
+  })
 })
 
 
