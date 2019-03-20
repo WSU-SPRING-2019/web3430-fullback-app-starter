@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Book } from '../models/book';
 import { BooksService } from '../services/books.service';
 
@@ -8,6 +8,7 @@ import { BooksService } from '../services/books.service';
 })
 export class BookComponent {
     @Input() book : Book
+    @Output() bookDeleted: EventEmitter<Book> = new EventEmitter()
     expanded : boolean = false
 
     constructor(private booksService : BooksService){}
@@ -17,6 +18,8 @@ export class BookComponent {
     }
 
     onDelete(book : Book){
-        this.booksService.deleteBook(book);
+        this.booksService.deleteBook(book).subscribe(res => {
+            this.bookDeleted.emit(res)
+        })
     }
 }

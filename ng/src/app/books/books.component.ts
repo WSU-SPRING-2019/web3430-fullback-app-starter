@@ -11,9 +11,13 @@ export class BooksComponent implements OnInit {
     books : Book[] = []
 
     ngOnInit(): void {
-        this.booksService.getBooks().subscribe(data => this.books = data)
+        this.updateListing()
     }
 
+    updateListing(){
+        this.booksService.getBooks().subscribe(data => this.books = data)
+    }
+    
     sortByTitle(){
         this.books.sort((b1, b2) => {
             if(b1.title == b2.title) return 0

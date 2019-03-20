@@ -1,5 +1,5 @@
 <button (click)="sortByTitle()" class="btn btn-secondary">Sort</button>&nbsp;
 <a routerLink="/books/new" class="btn btn-primary">New Book</a>
 <div class="card-columns">
-    <book-el *ngFor="let book of books" [book]="book"></book-el>
+    <book-el *ngFor="let book of books" [book]="book" (bookDeleted)="updateListing()"></book-el>
 </div>

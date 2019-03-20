@@ -35,13 +35,31 @@ router.get('/api/books/:id', function(req, res, next){
   })
 })
 
-
-
 router.put('/api/books/:id/update', function(req, res, next){
-  res.json({success: false, message: "Not implemented yet"})
+  Book.findById(req.params.id, (err, book) => {
+    if(err){
+      res.json({success: false, message: "Book not found"})
+    }else{
+      console.log(req.body)
+      Object.assign(book, req.body)
+      book.save(err => {
+        if(err){
+          res.json({success: false, message: "Unable to update book"})
+        }else{
+          res.end()
+        }
+      })
+    }
+  })
 })
 
 router.delete('/api/books/:id/delete', function(req, res, next){
-  res.json({success: false, message: "Not implemented yet"})
+  Book.findByIdAndRemove(req.params.id, (err) => {
+    if(err){
+      res.json({success: false, message: "Unable to delete book or book is not found"})
+    }else{
+      res.end()
+    }
+  })
 })
 export {router }

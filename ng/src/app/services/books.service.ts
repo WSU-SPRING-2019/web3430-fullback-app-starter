@@ -26,10 +26,9 @@ export class BooksService {
 
   updateBook(book: Book): any {
     return this.http.put<Book>(`http://localhost:8080/api/books/${book._id}/update`, book, httpHeaders)
-    return of(null)
   }
 
   deleteBook(book: Book): any {
-    //TODO
+    return this.http.delete<Book>(`http://localhost:8080/api/books/${book._id}/delete`, httpHeaders)
   }
 }
