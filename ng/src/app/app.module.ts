@@ -9,6 +9,7 @@ import { BookComponent } from './books/book.component';
 import { routes } from './routes'
 import { RouterModule } from '@angular/router';
 import { BookFormComponent } from './books/book-form.component';
+import { ToastrModule } from 'ngx-toastr'
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { BookFormComponent } from './books/book-form.component';
     BrowserModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
