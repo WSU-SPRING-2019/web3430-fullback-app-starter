@@ -4,9 +4,10 @@ let createError = require('http-errors');
 let debug = require('debug')(APP_TITLE);
 let http = require('http');
 let express = require('express');
-let cors = require('cors')
+import cors from 'cors';
 let path = require('path');
 let cookieParser = require('cookie-parser');
+let passport = require('passport');
 let session = require('express-session');
 let flash = require('express-flash');
 let logger = require('morgan');
@@ -14,6 +15,7 @@ let sassMiddleware = require('node-sass-middleware');
 
 // Connect to mongodb using mongoose
 import { connect } from "./config/db"
+require('./config/passport');
 connect('mongodb://localhost:27017/mine')
 
 let app = express();
@@ -28,8 +30,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors()) // To allow cross-origin resource sharing
-
+app.use(cors());
 app.use(cookieParser());
 app.use(session({
   secret: 'secret_goes_here',
@@ -48,6 +49,9 @@ app.use(sassMiddleware({
 
 // Static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Authentication
+app.use(passport.initialize());
 
 // Routing
 import { configuretRoutes } from './config/routes'

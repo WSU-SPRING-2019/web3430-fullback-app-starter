@@ -1,66 +1,56 @@
 import mongoose from 'mongoose'
 import crypto from 'crypto'
-import jwt from 'jsonwebtoken'
+import {getSignedAuthenticationToken } from "../helpers/require_login"
 const Schema = mongoose.Schema
 
-let bookSchema = new Schema ({
-    title: String,
-    poster: String,
-    isbn: String,
-    author: String,
-    synopsis: String
+let bookSchema = new Schema({
+  title: String,
+  poster: String,
+  isbn: String,
+  author: String,
+  synopsis: String,
 })
 
 let userSchema = new Schema({
-    username : {
-        type: String,
-        unique : true,
-        required: true,
-        trim: true
-    },
-    email : {
-        type: String,
-        unique : true,
-        required: true,
-        trim: true
-    },
-    firstName : {
-        type: String,
-        required: true,
-        trim: true
-    },
-    lastName : {
-        type: String,
-        required: true,
-        trim: true
-    },
-    hash: String,
-    salt: String
+  username: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+    trim: true
+  },
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
+  hash: String,
+  salt: String
 })
 
-userSchema.methods.setPassword = function (pwd){
-    this.salt = crypto.randomBytes(16).toString("hex")
-    this.hash = crypto.pbkdf2Sync(pwd, this.salt, 1000, 64, 'sha12').toString("hex")
+userSchema.methods.setPassword = function(password){
+  this.salt = crypto.randomBytes(16).toString('hex')
+  this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex')
 }
 
-userSchema.methods.validPassword = function (pwd){
-    let h = crypto.pbkdf2Sync(pwd, this.salt, 1000, 64, 'sha12').toString("hex")
-
-    return h === this.hash
+userSchema.methods.validPassword = function(password) {
+  let hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex')
+  return this.hash === hash
 }
 
-userSchema.methods.generateJWT = function (){
-    let expiredAfter = new Date()
-    expiredAfter.setDate(expiredAfter.getDate() + 5)
+userSchema.methods.generateJwt = function() {
+  let expiry = new Date()
+  expiry.setDate(expiry.getDate() + 7)
 
-    return jwt.sign({
-        _id: this._id,
-        username: this.username,
-        email: this.email,
-        firstName: this.firstName,
-        lastName: this.lastName,
-        exp: parseInt(expiredAfter.getTime() / 1000)
-    }, "SHHHHHHHH" )
+  return getSignedAuthenticationToken(this, expiry)
 }
 
 export let Book = mongoose.model("Book", bookSchema)
