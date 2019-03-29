@@ -19,7 +19,7 @@ passport.use(new LocalStrategy(
       // Return if password is wrong
       if (!user.validPassword(password)) {
         return done(null, false, {
-          message: 'In correct password'
+          message: 'Incorrect password'
         })
       }
       // If credentials are correct, return the user object

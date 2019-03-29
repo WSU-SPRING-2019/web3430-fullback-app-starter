@@ -5,7 +5,8 @@ export function connect(uri) {
   }
 
   mongoose.connect(uri, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useCreateIndex: true
   });
 
   // CONNECTION EVENTS

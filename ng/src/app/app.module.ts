@@ -10,12 +10,14 @@ import { routes } from './routes'
 import { RouterModule } from '@angular/router';
 import { BookFormComponent } from './books/book-form.component';
 import { ToastrModule } from 'ngx-toastr'
+import { LoginFormComponent } from './users/login-form-component';
 @NgModule({
   declarations: [
     AppComponent,
     BooksComponent,
     BookComponent,
-    BookFormComponent
+    BookFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
