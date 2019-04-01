@@ -4,7 +4,7 @@ import { User } from "../models/schemas";
 let router = express.Router()
 
 /* GET /api/users/register/ */
-router.get('/api/users/register', function(req, res, next) {
+router.post('/api/users/register', function(req, res, next) {
   let user = new User();
   console.log(req.body)
   user.firstName = req.body.firstName;
@@ -22,7 +22,7 @@ router.get('/api/users/register', function(req, res, next) {
   });
 });
 
-router.get('/api/users/login', function(req, res, next) {
+router.post('/api/users/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info){
     if (err) {
       res.status(404).json(err);

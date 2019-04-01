@@ -1,4 +1,8 @@
 <h2>Log in</h2>
+<p>
+  If you don't have an account, 
+  please <a routerLink="/register" class="btn btn-primary">register</a> here.
+</p>
 <form #f="ngForm" (ngSubmit)="onSubmit(f)" [ngClass]="{'was-validated': !f.valid && !f.pristine}">
   <div class="form-group row">
     <label for="username" class="col-sm-2 col-form-label">Username</label>
