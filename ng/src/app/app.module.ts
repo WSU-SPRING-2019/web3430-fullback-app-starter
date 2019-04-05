@@ -12,6 +12,8 @@ import { BookFormComponent } from './books/book-form.component';
 import { ToastrModule } from 'ngx-toastr'
 import { LoginFormComponent } from './users/login-form-component';
 import { RegisterFormComponent } from './users/register-form.component';
+import { UserComponent } from './users/user.component';
+import { AuthenticationGuard } from './services/authentication.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +21,8 @@ import { RegisterFormComponent } from './users/register-form.component';
     BookComponent,
     BookFormComponent,
     LoginFormComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,7 @@ import { RegisterFormComponent } from './users/register-form.component';
     HttpClientModule,
     ToastrModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

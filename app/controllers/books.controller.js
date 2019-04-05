@@ -1,5 +1,6 @@
 import express from 'express'
 import { Book } from "../models/schemas"
+import { requireLogin } from '../helpers/require_login';
 let router = express.Router()
 
 router.get('/api/books', function(req, res, next){
@@ -14,7 +15,7 @@ router.get('/api/books', function(req, res, next){
   
 })
 
-router.post('/api/books/create', function(req, res, next){
+router.post('/api/books/create', requireLogin, function(req, res, next){
   new Book(req.body).save(err => {
     if(err){
       res.json({success: false, message: "Unable to save book"})
@@ -35,7 +36,7 @@ router.get('/api/books/:id', function(req, res, next){
   })
 })
 
-router.put('/api/books/:id/update', function(req, res, next){
+router.put('/api/books/:id/update', requireLogin, function(req, res, next){
   Book.findById(req.params.id, (err, book) => {
     if(err){
       res.json({success: false, message: "Book not found"})
@@ -53,7 +54,7 @@ router.put('/api/books/:id/update', function(req, res, next){
   })
 })
 
-router.delete('/api/books/:id/delete', function(req, res, next){
+router.delete('/api/books/:id/delete', requireLogin, function(req, res, next){
   Book.findByIdAndRemove(req.params.id, (err) => {
     if(err){
       res.json({success: false, message: "Unable to delete book or book is not found"})

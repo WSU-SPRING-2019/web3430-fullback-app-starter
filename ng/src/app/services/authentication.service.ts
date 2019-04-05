@@ -14,6 +14,10 @@ const httpHeaders = {
 export class AuthenticationService {
   constructor(private http : HttpClient){}
 
+  static isAuthenticated(): boolean {
+    return localStorage.getItem('auth-token') !== null
+  }
+
   register(user: User): any {
     return this.http.post<User>('http://localhost:8080/api/users/register', user, httpHeaders)
   }
