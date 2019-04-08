@@ -4,7 +4,10 @@ import { Book } from '../models/book';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpHeaders = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
+  })
 }
 
 @Injectable({
