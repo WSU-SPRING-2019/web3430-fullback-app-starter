@@ -14,6 +14,14 @@ const httpHeaders = {
 export class AuthenticationService {
   constructor(private http : HttpClient){}
 
+  static getHttpHeaders(){
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('auth-token')}`
+      })
+    }
+  }
   static isAuthenticated(): boolean {
     return localStorage.getItem('auth-token') !== null
   }

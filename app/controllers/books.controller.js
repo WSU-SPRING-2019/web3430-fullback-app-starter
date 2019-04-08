@@ -55,6 +55,7 @@ router.put('/api/books/:id/update', requireLogin, function(req, res, next){
 })
 
 router.delete('/api/books/:id/delete', requireLogin, function(req, res, next){
+  console.log(req.headers)
   Book.findByIdAndRemove(req.params.id, (err) => {
     if(err){
       res.json({success: false, message: "Unable to delete book or book is not found"})
